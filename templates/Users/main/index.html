@@ -1,0 +1,599 @@
+{% extends 'bases/userbase.html' %}
+{% load static %}
+{% block content %}
+<!-- slider section -->
+<section class="slider_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 offset-md-1">
+        <div class="detail-box" id="head">
+          <h1>
+            <span> UniStay</span> <br>
+          </h1>
+          {% if user.is_authenticated %}
+          <h2>Welcome
+            {{ user.first_name}}! </h2>
+          {% else %}
+          <h4>CHRIST Lavasa <br>
+            Accomodation Management </h4>
+          {% endif %}
+
+          <p>
+            Find the perfect student-friendly rental – where convenience meets comfort on your academic journey."
+          </p>
+          <div class="btn-box">
+            <a href="#about" class="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end slider section -->
+</div>
+
+<!-- find section -->
+<!-- <section class="find_section ">
+  <div class="container">
+    <form action="">
+      <div class=" form-row">
+        <div class="col-md-5">
+          <input type="text" class="form-control" placeholder="Search Your Categories ">
+        </div>
+        <div class="col-md-5">
+          <input type="text" class="form-control" placeholder="Location ">
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="">
+            search
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section> -->
+
+<!-- end find section -->
+
+
+<!-- about section -->
+
+<section class="about_section layout_padding-bottom">
+  <div class="square-box">
+    <img src="{% static 'users/images/square.png' %}" alt="">
+  </div>
+  <div class="container" id="about">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="img-box">
+          <img src="{% static 'users/images/lavasa.jpeg' %}" alt="" height=350px>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              About UniStay
+            </h2>
+          </div>
+          <p>
+            Welcome to <b>UniStay</b> – your premier destination for student accommodation in <b>Lavasa</b>. We
+            specialize in providing
+            hassle-free renting facilities tailored to the needs of students. With a wide range of options including
+            studio apartments, shared houses, and private rooms, we prioritize safety, comfort, and affordability. Our
+            user-friendly website makes it easy to browse, compare, and book accommodations, supported by responsive
+            customer service.<b>Find your perfect home-away-from-home with UniStay today!</b>
+          </p>
+          <!-- <a href="{% url 'user_login' %}" class="">
+            Read More
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end about section -->
+
+<!-- sale section -->
+
+<section class="sale_section layout_padding-bottom">
+  <div class="container-fluid">
+    <div class="heading_container" id="prop">
+      <h2>
+        Properties for Rent
+      </h2>
+      <p>
+        Discover your perfect home among our curated list of diverse and desirable properties!
+      </p>
+    </div>
+    <div class="sale_container">
+      {% for i in street %}
+      <div class="box">
+        <div class="img-box">
+          <img src="{{ i.Street_image.url }}" alt="" style=" height: 90%; width: 90%;">
+        </div>
+        <div class="detail-box">
+          <h6>
+              {% if user.is_authenticated %}
+            {% if request.user.id %}
+            <a href="{% url 'redirect_page' street_id=i.id user_id=request.user.id %}">
+                {% else %}
+                <a href="{% url 'user_login' %}">
+                    {% endif %}
+              {{ i.Street_name }}
+            {% else %}
+            <a href="{% url 'user_login' %}">{{ i.Street_name }}</a>
+            {% endif %}
+          </h6>
+          </a>
+          <p>
+            {{ i.Street_address }}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/celebrations.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Celebrations Girls Hostel#}
+            {# </h6>#}
+          {# <p>#}
+            {# Taluka Mulshi, 3, Dasve Circle, opposite Christ College, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/thicket.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Thicket Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# Thicket St, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/Residence.png' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# CHRIST RESIDENCE#}
+            {# </h6>#}
+          {# <p>#}
+            {# There are many variations of passages of Lorem Ipsum available, but#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/club view.png' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Club View Apartments#}
+            {# </h6>#}
+          {# <p>#}
+            {# CG32+6C4, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/valley.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Valley Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# CG42+4JR, Valley St, Lavasa, Maharashtra 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/lakeview.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# LakeView Apartments#}
+            {# </h6>#}
+          {# <p>#}
+            {# Portofino Street, 412112 Lavasa, India#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/hill view.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# Hill View Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# Hill View Street, Dasve Town, Mulshi, Lavasa 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      {# <div class="box">#}
+        {# <div class="img-box">#}
+          {# <img src="{% static 'users/images/school street.jpeg' %}" alt="">#}
+          {# </div>#}
+        {# <div class="detail-box">#}
+          {# <h6>#}
+            {# School Street Villas#}
+            {# </h6>#}
+          {# <p>#}
+            {# School Street, LAVASA CITY, Lavasa - 412112#}
+            {# </p>#}
+          {# </div>#}
+        {# </div>#}
+      </div>
+
+    <!-- <div class="btn-box">
+      <a href="">
+        Find More
+      </a>
+    </div> -->
+  </div> 
+</section>
+
+<!-- end sale section -->
+
+<!-- price section -->
+
+<!-- <section class="price_section layout_padding-bottom">
+  <div class="container">
+    <div class="heading_container">
+      <h2>
+        Our Pricing
+      </h2>
+      <p>
+        There are many variations of passages of Lorem Ipsum available, but the
+      </p>
+    </div>
+    <div class="price_container">
+      <div class="box">
+        <div class="detail-box">
+          <div class="heading-box">
+            <h4>
+              01
+            </h4>
+            <h6>
+              Basic
+            </h6>
+          </div>
+          <div class="text-box">
+            <h2>
+              $1000.00
+            </h2>
+            <ul>
+              <li>
+                variations of
+              </li>
+              <li>
+                passages of Lorem
+              </li>
+              <li>
+                Ipsum available,
+              </li>
+              <li>
+                but the majority
+              </li>
+              <li>
+                have suffered
+              </li>
+              <li>
+                alteration in
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn-box">
+          <a href="">
+            Buy Now
+          </a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="detail-box">
+          <div class="heading-box">
+            <h4>
+              02
+            </h4>
+            <h6>
+              Standard
+            </h6>
+          </div>
+          <div class="text-box">
+            <h2>
+              $2000.00
+            </h2>
+            <ul>
+              <li>
+                variations of
+              </li>
+              <li>
+                passages of Lorem
+              </li>
+              <li>
+                Ipsum available,
+              </li>
+              <li>
+                but the majority
+              </li>
+              <li>
+                have suffered
+              </li>
+              <li>
+                alteration in
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn-box">
+          <a href="">
+            Buy Now
+          </a>
+        </div>
+      </div>
+      <div class="box">
+        <div class="detail-box">
+          <div class="heading-box">
+            <h4>
+              03
+            </h4>
+            <h6>
+              Premium
+            </h6>
+          </div>
+          <div class="text-box">
+            <h2>
+              $3000.00
+            </h2>
+            <ul>
+              <li>
+                variations of
+              </li>
+              <li>
+                passages of Lorem
+              </li>
+              <li>
+                Ipsum available,
+              </li>
+              <li>
+                but the majority
+              </li>
+              <li>
+                have suffered
+              </li>
+              <li>
+                alteration in
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn-box">
+          <a href="">
+            Buy Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+end price section -->
+
+<!-- deal section -->
+
+<section class="deal_section layout_padding-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2>
+              Your Dream Home Awaits: Get This Deal Now!
+            </h2>
+          </div>
+          <p>
+            Discover a treasure trove of unbeatable offers on our housing website, bringing you one step closer to
+            finding your perfect dream home at an incredible value. Don't miss out on these exclusive deals!
+          </p>
+          <!-- <a href="">
+            Get A Quote
+          </a> -->
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="img-box">
+          <div class="box b1">
+            <img src="{% static 'users/images/IMG1.jpeg' %}" alt="" height=200px width=900px>
+          </div>
+          <div class="box b1">
+            <img src="{% static 'users/images/room.jpeg' %}" alt="" height=200px width=900px>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end deal section -->
+
+
+<!-- us section -->
+<section class="us_section layout_padding2">
+
+  <div class="container">
+    <div class="heading_container">
+      <h2>
+        Why Choose Us?
+      </h2>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="box">
+          <div class="img-box">
+            <img src="{% static 'users/images/u-1.png' %}" alt="">
+          </div>
+          <div class="detail-box">
+            <h3 class="price">
+              5+
+            </h3>
+            <h5>
+              Years of House
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="box">
+          <div class="img-box">
+            <img src="{% static 'users/images/u-2.png' %}" alt="">
+          </div>
+          <div class="detail-box">
+            <h3>
+              1000+
+            </h3>
+            <h5>
+              Projects Delivered
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="box">
+          <div class="img-box">
+            <img src="{% static 'users/images/u-3.png' %}" alt="">
+          </div>
+          <div class="detail-box">
+            <h3>
+              2000+
+            </h3>
+            <h5>
+              Satisfied Customers
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="box">
+          <div class="img-box">
+            <img src="{% static 'users/images/u-4.png' %}" alt="">
+          </div>
+          <div class="detail-box">
+            <h3>
+              1500+
+            </h3>
+            <h5>
+              Cheap Rates
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="btn-box">
+      <a href="">
+        Get A Quote
+      </a>
+    </div> -->
+  </div>
+</section>
+
+<!-- end us section -->
+
+<!-- client secction -->
+
+<section class="client_section layout_padding">
+  <div class="container-fluid">
+    <div class="heading_container">
+      <h2>
+        What Says Our Customers!
+      </h2>
+    </div>
+    <div class="client_container">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="box">
+              <div class="img-box">
+                <img src="{% static 'users/images/girlicon.jpeg' %}" alt="" height=130px width=150px>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  <span>Majority</span>
+                  <hr>
+                </h5>
+                <p>
+                  I wanted to commend your platform for its exceptional property listings. The high-quality images,
+                  accurate descriptions, and essential details provided on each listing exceeded my expectations. This
+                  level of detail made it easy for me to make informed decisions throughout my house-hunting journey.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="box">
+              <div class="img-box">
+                <img src="{% static 'users/images/boy.jpeg' %}" alt="" height=130px width=150px>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  <span>Majority</span>
+                  <hr>
+                </h5>
+                <p>
+                  The inclusion of tenant reviews and ratings played a pivotal role in my decision-making process.
+                  Knowing about the experiences of previous tenants provided valuable insights and contributed to my
+                  confidence in choosing the right rental.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="box">
+              <div class="img-box">
+                <img src="{% static 'users/images/avatar.jpeg' %}" alt="" height=130px width=130px>
+              </div>
+              <div class="detail-box">
+                <h5>
+                  <span>Majority</span>
+                  <hr>
+                </h5>
+                <p>
+                  I encountered a minor issue during my search and reached out to your customer support. The prompt and
+                  helpful response I received demonstrated your commitment to customer satisfaction. It's refreshing to
+                  experience such responsiveness in the online rental process.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- end client section -->
+{% endblock content %}OkayOkayOkay I'll tell
